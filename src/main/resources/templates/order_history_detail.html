@@ -1,0 +1,235 @@
+	<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ラクラクアロハ - 注文履歴詳細</title>
+<link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<link href="../static/css/piza.css" rel="stylesheet" th:href="@{/css/piza.css}">
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="item_list.html" th:href="@{/}"> <!-- 企業ロゴ --> <img
+						alt="main log" src="../static/../static/img_aloha/header_logo.png" th:src="@{/img_aloha/header_logo.png}" height="35">
+					</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<p class="navbar-text navbar-right">
+						<a href="cart_list.html" th:href="@{/showCartList}" class="navbar-link">ショッピングカート</a>&nbsp;&nbsp;
+						<span sec:authorize="hasRole('ROLE_ADMIN')"><a class="navbar-link" th:href="@{/}">管理者権限</a>&nbsp;&nbsp;</span>
+						<a href="order_history.html" th:href="@{/showOrderHistory}" class="navbar-link">注文履歴</a>&nbsp;&nbsp;
+						<span th:if="${session.userName}" th:text="'こんにちは' + ${session.userName} + 'さん'"></span>&nbsp;
+						<a href="login.html" class="navbar-link" th:href="@{/loginUser}" th:unless="${session.userName}">ログイン</a>
+						&nbsp;<a href="item_list_pizza.html" class="navbar-link" th:href="@{/logout}" th:if="${session.userName}">ログアウト</a>
+					</p>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+
+
+		<!-- table -->
+		<div class="row">
+			<div
+				class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
+				<h3 class="text-center">注文日時：<span th:text="${#dates.format(order.orderDate,'yyyy年MM年dd日')}">2020年07月29日</span></h3>
+				<table class="table table-striped item-list-table">
+					<tbody>
+						<tr class="tr-color">
+							<th>
+								<div class="text-center">
+									商品名
+								</div>
+							</th>
+							<th>
+								<div class="text-center">
+									サイズ、価格(税抜)、数量
+								</div>
+							</th>
+							<th>
+								<div class="text-center">
+									トッピング、価格(税抜)
+								</div>
+							</th>
+							<th>
+								<div class="text-center">
+									小計
+								</div>
+							</th>
+						</tr>
+						<tr class="tr-color" th:each="orderItem:${orderItemList}">
+							<td>
+								<div class="center">
+									<img src="../static/img_aloha/1.jpg" th:src="${orderItem.item.imagePath}"
+										class="img-responsive img-rounded item-img-center" width="100" height="300"><br>
+									<div class="text-center" th:text="${orderItem.item.name}">
+									じゃがばたベーコン
+								</div>
+								</div>
+							</td>
+							<td>
+								<span class="price" th:text="${orderItem.size}">&nbsp;Ｌ</span>&nbsp;&nbsp;
+								<span th:switch="${orderItem.size}">
+								     <span id="size" th:case="M" th:text="${#numbers.formatInteger(orderItem.item.priceM,2,'COMMA')+'円'}">2,000円</span>
+								     <span id="size" th:case="L" th:text="${#numbers.formatInteger(orderItem.item.priceL,2,'COMMA')+'円'}">3,000円</span>
+								</span>
+								<span th:text="${orderItem.quantity+'個'}" id="quantity">&nbsp;&nbsp;1個</span>
+							</td>
+							<td>
+								<ul th:each="orderTopping:${orderItem.orderToppingList}">
+									<li>
+									<span th:text="${orderTopping.topping.name}">ピーマン</span>
+									<span th:switch="${orderItem.size}" id="topping">
+									<span th:case="M" th:text="${orderTopping.topping.priceM +'円'}">200円</span>
+									<span th:case="L" th:text="${orderTopping.topping.priceL +'円'}">300円</span>
+									</span>
+									</li>
+								</ul>
+							</td>
+							<td>
+								<div id="subtotal" th:text="${#numbers.formatInteger(orderItem.getSubTotal(),2,'COMMA')+'円'}" class="text-center">
+									3,280円
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="row">
+			<div
+				class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
+　　　				<h3 class="text-center">お届け情報</h3>
+					<table class="table table-striped item-list-table">
+						<tbody>
+							<tr class="tr-color">
+								<td>
+									<div class="text-center">お名前</div>
+								</td>
+								<td><div class="text-center" th:text="${order.destinationName+'様'}">アロハ太郎様</div>
+								</td>
+							</tr>
+							<tr class="tr-color">
+								<td>
+									<div class="text-center">メールアドレス</div>
+								</td>
+								<td><div class="text-center" th:text="${order.destinationEmail}">aloha@mail&#046;com</div>
+							</tr>
+							<tr class="tr-color">
+								<td>
+									<div class="text-center">郵便番号</div>
+								</td>
+								<td><div class="text-center" th:text="${'〒'+order.destinationZipcode}">〒220-8112</div>
+							</tr>
+							<tr class="tr-color">
+								<td>
+									<div class="text-center">住所</div>
+								</td>
+								<td><div class="text-center" th:text="${order.destinationAddress}">神奈川県横浜市西区みなとみらいランドマークタワー12階</div>
+							</tr>
+							<tr class="tr-color">
+								<td>
+									<div class="text-center">電話番号</div>
+								</td>
+								<td><div class="text-center" th:text="${order.destinationTel}">000-0000-0000</div>
+							</tr>
+							<tr class="tr-color">
+								<td>
+									<div class="text-center">配達日時</div>
+								</td>
+								<td><div class="text-center" th:text="${order.deliveryTime.toLocalDateTime().getYear()}+'/'+${order.deliveryTime.toLocalDateTime().getMonthValue()}+'/'+${order.deliveryTime.toLocalDateTime().getDayOfMonth()}+' '+${order.deliveryTime.toLocalDateTime().getHour()}+'時頃'">08月09日18時</div>
+							</tr>
+							<tr class="tr-color">
+								<td>
+									<div class="text-center">お支払い金額</div>
+								</td>
+								<td>
+								<div th:text="${#numbers.formatInteger(order.getCalcTotalPrice(),2,'COMMA')+'円'}" class="text-center">
+									3,280円
+								</div>
+								</td>
+							</tr>
+								<tr class="tr-color">
+								<td>
+									<div class="text-center">お支払い方法</div>
+								</td>
+								<td>
+								<div th:switch="${order.paymentMethod}">
+									<div class="text-center" th:case="1" th:text="代金引換">代金引換</div>
+				                	<div class="text-center" th:case="2" th:text="クレジットカード">クレジットカード</div>
+								</div>
+								</td>
+							</tr>
+							<tr class="tr-color">
+								<td>
+									<div class="text-center">消費税</div>
+								</td>
+                                <td>
+                                <div class="text-center" th:text="${#numbers.formatInteger(order.getTax(),2,'COMMA')+'円'}">8,000円</div>
+							    </td>
+							</tr>
+							<tr class="tr-color">
+								<td>
+									<div class="text-center">配達情報</div>
+								</td>
+								<td>
+								<input type="hidden" id="status" th:value="${order.status}">
+									<div th:switch="${order.status}">
+					                <div class="text-center" th:case="1" th:text="未入金">未入金</div>
+				                	<div class="text-center" th:case="2" th:text="入金済">入金済み</div>
+		               		 		<div class="text-center" th:case="3" th:text="配達完了">配達完了</div>
+									<div class="text-center" th:case="9" th:text="キャンセル済">キャンセル済</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		<div class="row">
+			<div class="col-xs-offset-5 col-xs-3">
+				<div class="form-group">
+					<a href="order_history.html" th:href="@{/showOrderHistory}">
+						<button id="return_order_history_btn" class="form-control btn btn-warning btn-block">注文履歴一覧に戻る</button>
+					</a>
+				</div>
+					<div class="form-group">
+						<button id="cansel_btn" class="form-control btn btn-warning btn-block">
+					    	注文をキャンセル
+					    </button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<form th:action="@{/orderCansel}" method="post" name="orderCancelForm">
+		<input type="hidden" th:value="${order.id}" name="orderId">
+	</form>
+	<!-- end container -->
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+	<script src="../static/js/cansel_confirm.js" th:src="@{/js/cansel_confirm.js}"></script>
+</body>
+</html>

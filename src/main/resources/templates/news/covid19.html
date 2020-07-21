@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ラクラクアロハ - 感染症に関するお知らせ</title>
+<link href="../static/css/bootstrap.css" th:href="@{/css/bootstrap.css}" rel="stylesheet">
+<link href="../static/css/piza.css" th:href="@{/css/piza.css}" rel="stylesheet">
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<link rel="stylesheet" href="../../static/css/bootstrap.css"
+	th:href="@{/css/bootstrap.css}">
+<link rel="stylesheet" href="../../static/css/style.css"
+	th:href="@{/css/piza.css}">
+</head>
+<body>
+	<div class="container">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="item_list.html" th:href="@{/}"> <!-- 企業ロゴ --> <img
+						alt="main log" src="../static/img_aloha/header_logo.png" th:src="@{/img_aloha/header_logo.png}" height="35">
+					</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<p class="navbar-text navbar-right">
+						<a href="cart_list.html" class="navbar-link" th:href="@{/showCartList}">ショッピングカート</a>&nbsp;&nbsp;
+						<a href="order_history.html" class="navbar-link" th:href="@{/showOrderHistory}">注文履歴</a>&nbsp;&nbsp;
+						<span th:if="${session.userName}" th:text="'こんにちは' + ${session.userName} + 'さん'"></span>&nbsp;
+						<a href="login.html" class="navbar-link" th:href="@{/loginUser}" th:unless="${session.userName}">ログイン</a>
+						&nbsp;<a href="item_list_pizza.html" class="navbar-link" th:href="@{/logout}" th:if="${session.userName}">ログアウト</a>
+					</p>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+		
+		<!-- content -->
+		<div class="row">
+			<div
+				class="table-responsive col-lg-offset-1 col-lg-10 col-md-offset-1 col-md-10 col-sm-10 col-xs-12">
+				<h3 class="text-center">新型コロナウイルス感染症（COVID-19）に関するお知らせ</h3><br>
+				<table id="item_list_table" class="table table-striped item-list-table">
+					<tbody>
+						<tr>
+							<th class="th-news">
+							<h4 class="header-detail">従業員のマスク着用について</h4>
+								<span class="date-layout">
+									2020&nbsp;&#47;
+									05&nbsp;&#47;
+									18
+								</span><br>
+								<span class="content-detail">
+									<br>
+									いつもラクラクアロハをご利用いただき、誠にありがとうございます。<br>
+									<br>
+									ラクラクアロハでは、新型コロナウイルス感染症などの予防対策として、配達・接客時など就業中のマスク着用を徹底しております。いつもラクラクアロハをご利用いただき、誠にありがとうございます。<br>
+									一方、これから夏期にかけて気温・湿度が上昇する中でマスクを着用して業務を行うことは、従業員の熱中症リスクを高めてしまうため、付近に人がいない場合など状況に応じてマスクを外す場合がございます。いつもラクラクアロハをご利用いただき、誠にありがとうございます。<br>
+									<br>
+									お客様におかれましては、ご理解・ご了承のほど、よろしくお願い申し上げます。<br>	
+									<br>
+								</span>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+				<table id="item_list_table" class="table table-striped item-list-table">
+					<tbody>
+						<tr>
+							<th class="th-news">
+							<h4 class="header-detail">商品お受け取りについて</h4>
+								<span class="date-layout">
+									2020&nbsp;&#47;
+									05&nbsp;&#47;
+									16
+								</span><br>
+								<span class="content-detail">
+									<br>
+									いつもラクラクアロハをご利用いただき、誠にありがとうございます。<br>
+									<br>
+									ラクラクアロハでは、商品の受け取り時には、押印・サインをお願いしております。<br>
+									しかしながら新型コロナウイルスの感染拡大を受けて、押印・サインについては割愛させていただきたく存じます。<br>
+									<br>
+									お客様におかれましては、ご理解・ご了承のほど、よろしくお願い申し上げます。<br>	
+									<br>								
+								</span>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+				<table id="item_list_table" class="table table-striped item-list-table">
+					<tbody>
+						<tr>
+							<th class="th-news">
+							<h4 class="header-detail">デリバリーサービス開始について</h4>
+								<span class="date-layout">
+									2020&nbsp;&#47;
+									04&nbsp;&#47;
+									28
+								</span><br>
+								<span class="content-detail">
+									<br>
+									いつもラクラクアロハをご利用いただき、誠にありがとうございます。<br>
+									<br>
+									ラクラクアロハでは、新型コロナウイルスの感染拡大を受けて、この度デリバリーサービスを開始いたしました。<br>
+									<br>
+									お客様のご利用、心よりお待ちしております。<br>	
+									<br>								
+								</span>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<!-- footer -->
+		<nav class="navbar navbar-default footter">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="item_list.html" th:href="@{/}"> <!-- 企業ロゴ --> <img
+						alt="main log" src="../static/img_aloha/header_logo.png" th:src="@{/img_aloha/header_logo.png}" height="35">
+					</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<p class="navbar-text navbar-right">
+						<a href="item_list.html" th:href="@{/about}" class="navbar-link">このサイトについて</a>&nbsp;&#65372;&nbsp;
+						<a href="item_list.html" th:href="@{/news}" class="navbar-link">お知らせ</a>&nbsp;&#65372;&nbsp;
+						<a href="item_list.html" th:href="@{/}" class="navbar-link">個人情報の取り扱い</a>&nbsp;&#65372;&nbsp;
+						<a href="item_list.html" th:href="@{/support}" class="navbar-link">お問い合わせ</a>
+					</p>
+				</div>
+				<!-- /.navbar-collapse -->
+				<hr>
+				<div class="text-center">
+					&copy; RakuRakuAloha. All Rights Reserved.
+				</div><br>
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+	</div>
+</body>
+</html>

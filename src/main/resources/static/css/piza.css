@@ -1,0 +1,110 @@
+@CHARSET "UTF-8";
+
+/* サイズをオレンジ〇で囲む */
+span.price {
+ /* サイズ指定 */
+ width:175px;
+ height:175px;
+ /* 背景色 */
+ background-color:#ff4500;
+ /* 角を丸くする */
+ border-radius: 50%;
+ -webkit-border-radius: 50%;
+ -moz-border-radius: 50%;
+ 
+}
+/* 合計金額の文字の大きさを変える */
+span#total-price {
+	font-size: 35px;
+}
+
+/* 商品一覧の画像を中央寄せにする*/
+.item-img-center{
+  width:　220px;
+  height: 180px;
+  margin-left: auto; 
+  margin-right: auto;
+}
+/* 商品一覧のセルを固定幅にする*/
+.item-list-table{
+	table-layout: fixed;
+}
+
+th{
+	text-align: center;
+}
+
+/* paginationをセンターにする */
+#pagination-center{
+	text-align: center;
+}
+#pagination{
+	display: inline-block;
+}
+
+
+.th-news{
+	text-align: left;
+}
+.news-layout{
+	font-size: large;
+	padding-left: 8%;
+}
+.new{
+	font-size: small;
+	color: #ffa500;
+}
+.date-layout{
+	padding-left: 85%;
+}
+.header-detail{
+	padding-left: 1%;
+	border-left: solid 10px #1e90ff; 
+}
+.content-detail{
+	font-weight: normal;
+	font-size: 15px;
+}
+
+
+.tr-color:nth-child(odd){
+	background-color: #f0ffff;
+	opacity: 97%;
+}
+
+.tr-color:nth-child(even){
+	background-color: #f0fff0;
+	opacity: 97%;
+}
+
+.detail-background{
+	background-color: #f0ffff;
+	opacity: 97%;
+	margin-bottom: 20px;
+}
+
+.font-background{
+	background-color: #00ced1;
+	margin-bottom: 0;
+}
+/* .detail-botton{
+	opacity: 100%;
+} */
+
+
+body{
+	background-image: url("/svg/wave.svg");
+	background-position: center center;
+  	background-repeat: no-repeat;
+ 	background-attachment: fixed;
+ 	background-size: cover;
+ 	background-color: #D0F0FF;
+}
+
+.result{
+	margin-left: 85%;
+}
+
+.footter{
+	margin-bottom: 0;
+}
